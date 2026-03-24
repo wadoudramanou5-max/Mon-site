@@ -130,30 +130,23 @@ nav ul {
   padding: 0;
   list-style: none;
 }
-
 @media (max-width: 768px) {
   body {
     padding: 10px;
   }
 
-  /* Navigation */
-  nav ul {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* Produits en pleine largeur sur mobile */
+  /* Produits en colonne sur mobile */
   .product {
-    width: 90%;
-    margin: 10px auto;
-    display: block;
+    width: 95% !important;
+    margin: 10px auto !important;
+    display: block !important;
   }
 
-  /* Bouton centré sans margin fixe */
+  /* Bouton centré */
   button {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
   }
 
   /* Images responsives */
@@ -162,8 +155,14 @@ nav ul {
     height: auto;
   }
 
-  /* Header moins haut sur mobile */
+  /* Header */
   header {
     height: 12vh;
+  }
+
+  /* Navigation */
+  nav ul {
+    flex-direction: column;
+    gap: 8px;
   }
 }
