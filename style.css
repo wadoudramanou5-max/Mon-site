@@ -161,8 +161,9 @@ nav ul {
   }
 
   /* Navigation */
+  
   nav ul {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: column; /* ← c'est ça qui empile verticalement */
   }
+}
 }
