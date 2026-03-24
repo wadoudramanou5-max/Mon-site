@@ -117,3 +117,21 @@ button:hover{
     cursor: pointer;
     transition: 0.3s;
 }
+/* Quand l'écran fait moins de 768px (tablettes et mobiles) */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  /* Force tes colonnes à se mettre les unes sous les autres */
+  .ta-classe-de-conteneur { 
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Tes images doivent prendre toute la largeur dispo sans dépasser */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
