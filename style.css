@@ -131,18 +131,39 @@ nav ul {
   list-style: none;
 }
 
-/* Mise en page mobile */
 @media (max-width: 768px) {
   body {
     padding: 10px;
   }
 
+  /* Navigation */
   nav ul {
     flex-direction: column;
     gap: 8px;
   }
 
+  /* Produits en pleine largeur sur mobile */
+  .product {
+    width: 90%;
+    margin: 10px auto;
+    display: block;
+  }
+
+  /* Bouton centré sans margin fixe */
+  button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  /* Images responsives */
   img {
     width: 100%;
+    height: auto;
+  }
+
+  /* Header moins haut sur mobile */
+  header {
+    height: 12vh;
   }
 }
