@@ -4,6 +4,8 @@ const link3 = document.getElementById("contact")
 const link4 = document.getElementById("pdn")
 const link5 = document.getElementById("pdp")
 
+
+
 link1.addEventListener("click", function() {
     
     window.location.href = "index.html"
