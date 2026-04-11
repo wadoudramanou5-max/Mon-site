@@ -1,8 +1,8 @@
-const link1 = document.document.getElementById("accueil")
-const link2 = document.document.getElementById("about")
-const link3 = document.document.getElementById("contact")
-const link4 = document.document.getElementById("pdn")
-const link5 = document.document.getElementById("pdp")
+const link1 = document.getElementById("accueil")
+const link2 = document.getElementById("about")
+const link3 = document.getElementById("contact")
+const link4 = document.getElementById("pdn")
+const link5 = document.getElementById("pdp")
 
 
 
