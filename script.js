@@ -1,8 +1,8 @@
-const link1 = document.getElementById("accueil")
-const link2 = document.getElementById("about")
-const link3 = document.getElementById("contact")
-const link4 = document.getElementById("pdn")
-const link5 = document.getElementById("pdp")
+const link1 = document.querySelector(#link1)
+const link2 = document.querySelector(#link2)
+const link3 = document.querySelector(#link3)
+const link4 = document.querySelector(#link4)
+const link5 = document.querySelector(#link5)
 
 
 
@@ -36,6 +36,8 @@ const number="22937417444"
 function Commander(nom,prix){
     const message='Bonjour , je souhaite commander' + nom + 'Prix: ' + prix +'FCFA , merci de me confirmer la disponibilité'
     const lien = "https//wa.me/number text=${encodeURIComponent(message)}"
+
+    windox.open(lien, '_blank');
         
     
 }
