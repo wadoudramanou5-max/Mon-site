@@ -1,8 +1,8 @@
-const link1 = document.querySelector("accueil)
-const link2 = document.querySelector("about")
-const link3 = document.querySelector("contact")
-const link4 = document.querySelector("pdn")
-const link5 = document.querySelector("pdp")
+const link1 = document.document.getElementById("accueil)
+const link2 = document.document.getElementById("about")
+const link3 = document.document.getElementById("contact")
+const link4 = document.document.getElementById("pdn")
+const link5 = document.document.getElementById("pdp")
 
 
 
