@@ -34,7 +34,7 @@ link5.addEventListener("click", function(e){
 })
 const number="22937417444"
 function Commander(nom,prix){
-    const message='Bonjour , je souhaite commander' + nom + 'Prix: ' + prix +'FCFA' 'merci de me confirmer la disponibilité'
+    const message='Bonjour , je souhaite commander' + nom + 'Prix: ' + prix +'FCFA , merci de me confirmer la disponibilité'
     const lien = "https//wa.me/number text=${encodeURIComponent(message)}"
         
     
