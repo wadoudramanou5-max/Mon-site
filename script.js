@@ -5,19 +5,25 @@ const link4 = document.getElementById("pdn")
 const link5 = document.getElementById("pdp")
 
 
-
+if(link1){
 link1.addEventListener("click", function() {
     
     window.location.href = "index.html"
 })
+}
+if(link2){
 link2.addEventListener("click", function() {
     
     window.location.href = "about.html"
 })
+}
+if(link3){
 link3.addEventListener("click", function() {
    
     window.location.href = "contact.html"
 })
+}
+if(link4){
 link4.addEventListener("click", function(e){
     e.preventDefault()
     const peauNoire = document.querySelector(".produitpeaunoir")
@@ -25,6 +31,8 @@ link4.addEventListener("click", function(e){
     peauNoire.style.display = "block"
     peauBlanche.style.display = "none"
 })
+}
+if(link5){
 link5.addEventListener("click", function(e){
     e.preventDefault()
     const peauNoire = document.querySelector(".produitpeaunoir")
@@ -32,6 +40,6 @@ link5.addEventListener("click", function(e){
     peauNoire.style.display = "none"
     peauBlanche.style.display = "block"
 })
-
+}
 
     
