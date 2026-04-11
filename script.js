@@ -1,8 +1,8 @@
-const link1 = document.querySelector(#link1)
-const link2 = document.querySelector(#link2)
-const link3 = document.querySelector(#link3)
-const link4 = document.querySelector(#link4)
-const link5 = document.querySelector(#link5)
+const link1 = document.querySelector("accueil)
+const link2 = document.querySelector("about")
+const link3 = document.querySelector("contact")
+const link4 = document.querySelector("pdn")
+const link5 = document.querySelector("pdb")
 
 
 
