@@ -46,7 +46,7 @@ if(btn){
     function Commander(nom, prix){
         const message="Bonjour , je souhaite commander *${nom}* , Prix:${prix} FCFA  Merci de confirmer la disponibilité"
         const lien ='https://wa.me/${number}? text=${encodeURIComponent(message)}'
-        window.open(lien, '_blank'
+        window.open(lien, '__blank'
             
     }
     
