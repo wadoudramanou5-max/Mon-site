@@ -2,7 +2,7 @@ const link1 = document.querySelector("accueil)
 const link2 = document.querySelector("about")
 const link3 = document.querySelector("contact")
 const link4 = document.querySelector("pdn")
-const link5 = document.querySelector("pdb")
+const link5 = document.querySelector("pdp")
 
 
 
