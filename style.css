@@ -181,39 +181,33 @@ main > p:nth-of-type(2) {
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   min-height: 150px;
   padding: 22px 24px;
   border-radius: var(--radius);
   font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
   color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-.liensproduits a::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.liensproduits a#pdn::before {
+.liensproduits a#pdn {
   background: linear-gradient(155deg, var(--clay) 0%, var(--amber-deep) 55%, var(--amber) 100%);
 }
 
-.liensproduits a#pdp::before {
+.liensproduits a#pdp {
   background: linear-gradient(155deg, #6d4038 0%, var(--rose-deep) 55%, var(--rose) 100%);
-}
-
-.liensproduits a span,
-.liensproduits a {
-  z-index: 1;
 }
 
 .liensproduits a:hover {
   transform: translateY(-4px);
+  filter: brightness(1.08);
   box-shadow: 0 16px 34px rgba(59, 36, 25, 0.22);
 }
 
