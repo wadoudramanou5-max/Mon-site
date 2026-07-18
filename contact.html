@@ -16,16 +16,31 @@
             </ul>
         </nav>
     </header>
-
     <main>
         <h1>Contactez-nous</h1>
         <p>Nous sommes là pour vous aider ! N'hésitez pas à nous contacter pour toute question, suggestion ou demande d'assistance. Votre satisfaction est notre priorité.</p>
         <p>Vous pouvez nous joindre par les moyens suivants :</p>
         <ul>
             <li>Email : wadoudramanou5@gmail.com</li>
-            <li>Téléphone : +229 0197417444<a href="https://wa.me/2290197417444"  class="whatsapp" target="_blank"><button class="whatsapp-button">Appeler</button></a></li>
-            <li>Adresse :  Notre magasin est situé au marché Djrado à Porto-Novo</li>
+            <li>Téléphone : +229 0197417444<a href="https://wa.me/2290197417444" class="whatsapp" target="_blank"><button class="whatsapp-button">Appeler</button></a></li>
+            <li>Adresse : Notre magasin est situé au marché Djrado à Porto-Novo</li>
         </ul>
+
+        <h2 class="form-title">Ou écrivez-nous directement</h2>
+        <p class="form-subtitle">Remplissez ce formulaire, votre message s'ouvrira automatiquement sur WhatsApp.</p>
+
+        <form id="contactForm" class="contact-form">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+            <label for="telephone">Téléphone (optionnel)</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="Votre numéro">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Écrivez votre message ici..." rows="5" required></textarea>
+
+            <button type="submit" class="whatsapp-submit">Envoyer sur WhatsApp</button>
+        </form>
     </main>
     <div class="footer">
         <p>suivez-nous sur les réseaux sociaux</p>
