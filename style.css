@@ -394,6 +394,85 @@ main ul li {
 }
 
 /* ==========================================================================
+   Formulaire de contact (envoi direct vers WhatsApp)
+   ========================================================================== */
+
+.form-title {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  margin: 44px 0 6px;
+  color: var(--clay);
+}
+
+.form-subtitle {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 480px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.contact-form label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 12px;
+}
+
+.contact-form label:first-of-type { margin-top: 0; }
+
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--parchment);
+  color: var(--clay);
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--forest);
+  box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.15);
+}
+
+.whatsapp-submit {
+  margin-top: 20px;
+  border: none;
+  background: var(--forest);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 13px 20px;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.whatsapp-submit:hover {
+  background: var(--forest-deep);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .contact-form { padding: 20px; max-width: 100%; }
+}
+
+/* ==========================================================================
    Pied de page
    ========================================================================== */
 
