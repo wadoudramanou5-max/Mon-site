@@ -51,6 +51,24 @@ if(btn){
     }
     
 }
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nom = document.getElementById('nom').value;
+    const telephone = document.getElementById('telephone').value;
+    const message = document.getElementById('message').value;
+
+    let texte = `Bonjour, je m'appelle ${nom}.%0a`;
+    if (telephone) {
+        texte += `Téléphone : ${telephone}%0a`;
+    }
+    texte += `Message : ${message}`;
+
+    const numeroWhatsApp = '2290197417444';
+    const lienWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${texte}`;
+
+    window.open(lienWhatsApp, '_blank');
+});
 
 
     
