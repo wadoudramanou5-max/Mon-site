@@ -542,6 +542,23 @@ main ul li {
   font-size: 0.78rem;
   color: #b79f87;
 }
+.produitpeaunoir {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: apparition 0.8s ease forwards;
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* ==========================================================================
    Responsive
