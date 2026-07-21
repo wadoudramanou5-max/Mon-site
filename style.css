@@ -578,7 +578,7 @@ main ul li {
   }
 }
 
-.main {
+main {
   opacity: 0;
   transform: translateY(40px);
   animation: apparition 0.8s ease forwards;
