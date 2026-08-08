@@ -70,13 +70,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     window.open(lienWhatsApp, '_blank');
 });
 
-const menuToggle = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
-
-menuToggle.addEventListener("click", function () {
-    sidebar.classList.toggle("active");
-});
-
+function toggleMenu() { document.getElementById("sidebar").classList.toggle("active"); }
 
 
 
