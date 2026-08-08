@@ -829,10 +829,10 @@
 
         <nav id="main-nav" role="navigation">
             <ul>
-                <li><a href="index.html" id="acceuil">Accueil</a></li>
-                <li><a href="about.html" id="about">À propos</a></li>
+                <li><a href="#home" id="acceuil">Accueil</a></li>
+                <li><a href="#about" id="about">À propos</a></li>
                 <li><a href="produit.html" id="produits">Produits</a></li>
-                <li><a href="contact.html" id="contact">Contact</a></li>
+                <li><a href="#contact" id="contact">Contact</a></li>
             </ul>
         </nav>
 
@@ -845,7 +845,7 @@
     <main>
 
         <!-- ========== PAGE D'ACCUEIL ========== -->
-        <section>
+        <section id="home">
             <h1>Bienvenue dans mon magasin en ligne</h1>
             <p>Découvrez nos produits de qualité et profitez de nos offres spéciales !</p>
 
@@ -872,127 +872,22 @@
         </section>
 
         <!-- ========== PAGE À PROPOS ========== -->
-        <section>
+        <section id="about">
             <h1>À propos de nous</h1>
             <p>Bienvenue sur la page à propos de notre magasin en ligne ! Nous sommes passionnés par la fourniture de produits de qualité à nos clients. Notre mission est de rendre votre expérience d'achat en ligne agréable et satisfaisante.</p>
             <p>Nous sélectionnons soigneusement nos produits pour garantir leur qualité et leur durabilité. Notre équipe travaille dur pour vous offrir un service client exceptionnel, répondant à toutes vos questions et préoccupations.</p>
             <p>Merci de faire partie de notre communauté et de nous permettre de vous servir. Nous sommes impatients de vous offrir une expérience d'achat exceptionnelle !</p>
         </section>
 
-        <!-- ========== PAGE PRODUITS ========== -->
-        <section>
-            <h1>Nos produits</h1>
-            <p>Découvrez notre gamme de produits de qualité, soigneusement sélectionnés pour répondre à vos besoins. Nous proposons une variété d'articles pour satisfaire tous les goûts et préférences.</p>
-            <p>Voulez-vous les produits pour peau noire ou peau blanche ?</p>
-
-            <div class="liensproduits">
-                <a href="#" id="pdn" class="active-cat">Produits peau noire</a>
-                <a href="#" id="pdp">Produits peau blanche</a>
-            </div>
-
-            <!-- Peau noire -->
-            <div class="produitpeaunoir" id="produitpeaunoir">
-                <div class="message">
-                    <p>✨ Produits pour la peau noire</p>
-                </div>
-                <div class="product-grid">
-                    <div class="product">
-                        <img src="images/Creme-eclat-Ametis-2-600x600.png" alt="Ametis" />
-                        <h2>AMETIS</h2>
-                        <p>Crème unifiante et hydratante à la Niacinamide et vitamine B3.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/produitSVR.jpg" alt="SVR" />
-                        <h2>SVR</h2>
-                        <p>Traite l'acné, les taches et les rides. Tolérance maximale.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/download.jpg" alt="Produit" />
-                        <h2>Produit 2</h2>
-                        <p>Description du produit 2.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/produitnuhanciam.jpg" alt="Nuhanciam" />
-                        <h2>Nuhanciam</h2>
-                        <p>Unifie le teint et élimine les taches brunes.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/clarince.jpg" alt="Clarince" />
-                        <h2>Clarince</h2>
-                        <p>Description du produit.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/product2.webp" alt="Produit" />
-                        <h2>Produit 2</h2>
-                        <p>Description du produit 2.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <!-- Ajoutez d'autres produits ici -->
-                </div>
-            </div>
-
-            <!-- Peau blanche -->
-            <div class="produitpeaublanche" id="produitpeaublanche" style="display:none;">
-                <div class="message">
-                    <p>🌸 Produits pour la peau blanche</p>
-                </div>
-                <div class="product-grid">
-                    <div class="product">
-                        <img src="images/product2.webp" alt="Produit" />
-                        <h2>Produit 1</h2>
-                        <p>Description du produit 1.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <div class="product">
-                        <img src="images/product2.webp" alt="Produit" />
-                        <h2>Produit 2</h2>
-                        <p>Description du produit 2.</p>
-                        <span class="price">4 500 FCFA</span>
-                        <button class="WhatsApp-btn">Commander</button>
-                    </div>
-                    <!-- Ajoutez d'autres produits ici -->
-                </div>
-            </div>
-
-            <!-- Formulaire de commande -->
-            <h2 class="form-title">Ou écrivez-nous directement</h2>
-            <p class="form-subtitle">Remplissez ce formulaire pour passer votre commande précisément.</p>
-
-            <form id="contactForm" class="contact-form">
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" placeholder="EX: John Doe" required />
-
-                <label for="telephone">Téléphone</label>
-                <input type="number" id="telephone" name="telephone" placeholder="+229 000000" />
-
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Décrivez votre commande ici..." rows="5" required></textarea>
-
-                <button type="submit" class="whatsapp-submit">Envoyer sur WhatsApp</button>
-            </form>
-
-            <button class="more" onclick="window.location.href='index.html'">Retour à l'accueil</button>
-        </section>
+       
 
         <!-- ========== PAGE CONTACT ========== -->
-        <section>
+        <section id="contact">
             <h1>Contactez-nous</h1>
             <p>Nous sommes là pour vous aider ! N'hésitez pas à nous contacter pour toute question, suggestion ou demande d'assistance. Votre satisfaction est notre priorité.</p>
             <p>Vous pouvez nous joindre par les moyens suivants :</p>
             <ul>
-                <li>Email : wadoudramanou5@gmail.com</li>
+                <li>Email :...</li>
                 <li>
                     Téléphone : +229 0197417444
                     <a href="https://wa.me/2290197417444" class="whatsapp" target="_blank">
