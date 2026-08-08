@@ -616,121 +616,84 @@ main {
    RESPONSIVE : SIDEBAR
    ========================================= */
 
+
+/* Par défaut : le bouton est caché */
+.menu-toggle {
+    display: none;
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
 @media (max-width: 768px) {
 
-    /* Le header ne prend plus toute la largeur */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
-        z-index: 1000;
-        border: none;
-        background: transparent;
-        backdrop-filter: none;
-    }
-
-    /* Bouton trois traits */
+    /* Le bouton apparaît seulement ici */
     .menu-toggle {
         display: flex;
         align-items: center;
         justify-content: center;
 
         position: fixed;
-        top: 18px;
-        left: 18px;
+        top: 15px;
+        left: 15px;
 
-        width: 48px;
-        height: 48px;
+        width: 45px;
+        height: 45px;
 
         border: none;
-        border-radius: 12px;
+        border-radius: 10px;
 
         background: var(--clay);
         color: white;
 
-        font-size: 25px;
+        font-size: 24px;
         cursor: pointer;
 
-        z-index: 1100;
-
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-
-        transition: 0.25s ease;
+        z-index: 2000;
     }
 
-    .menu-toggle:hover {
-        background: var(--amber);
-        transform: scale(1.05);
-    }
-
-
-    /* =====================================
-       SIDEBAR
-       ===================================== */
-
+    /* Sidebar */
     header nav {
         position: fixed;
-
         top: 0;
         left: 0;
 
-        width: 270px;
+        width: 260px;
         height: 100vh;
 
-        padding: 90px 20px 30px;
+        padding: 80px 20px 20px;
 
         background: var(--clay);
-
-        box-shadow: 8px 0 30px rgba(0, 0, 0, 0.25);
 
         transform: translateX(-100%);
         transition: transform 0.3s ease;
 
-        z-index: 1050;
+        z-index: 1500;
     }
 
-    /* Sidebar ouverte */
+    /* Quand on clique sur le bouton */
     header nav.active {
         transform: translateX(0);
     }
 
-
-    /* Liste */
+    /* Menu vertical */
     header nav ul {
-        display: flex;
         flex-direction: column;
-
-        gap: 8px;
-
-        margin: 0;
-        padding: 0;
-
-        list-style: none;
+        gap: 10px;
     }
 
     header nav ul li {
         width: 100%;
     }
 
-
-    /* Liens */
     header nav ul li a {
         display: block;
-
         width: 100%;
-
-        padding: 15px 18px;
+        padding: 14px 15px;
 
         color: white;
-
-        font-size: 1rem;
-        font-weight: 600;
-
-        border-radius: 10px;
-
-        transition: 0.25s ease;
     }
 
     header nav ul li a::after {
@@ -739,23 +702,15 @@ main {
 
     header nav ul li a:hover {
         background: var(--amber);
-        transform: translateX(5px);
     }
 
-
-    /* Le contenu NE BOUGE PAS */
+    /* La page ne se décale pas */
     main {
         margin-left: 0;
     }
 
     .footer {
         margin-left: 0;
-    }
-
-    button.more {
-        margin-left: auto;
-        margin-right: auto;
-        width: auto;
     }
 }
 
