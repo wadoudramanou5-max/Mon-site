@@ -9,15 +9,22 @@
 </head>
 <body>
     <header>
-       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <nav>
-            <ul>
-                <li><a href="index.html"id="acceuil">Acceuil</a></li>
-                <li><a href="about.html" id="about">A propos</a></li>
-                <li><a href="produit.html" id="about">Produits</a></li>
-                <li><a href="contact.html" id="contact">Contact</a></li>
-            </ul>
-        </nav>
+        <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="toggleMenu()">
+           <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+     <nav id="main-nav" role="navigation">
+         <ul>
+              <li><a href="index.html" id="acceuil">Accueil</a></li>
+              <li><a href="about.html" id="about">À propos</a></li>
+              <li><a href="produit.html" id="produits">Produits</a></li>
+              <li><a href="contact.html" id="contact">Contact</a></li>
+           </ul>
+      </nav>
+
+       <div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
     </header>
 
     <main>
