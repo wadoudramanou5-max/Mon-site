@@ -73,5 +73,30 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
 
 
+// Ouvre ou ferme le menu
+function toggleMenu() {
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('menu-overlay');
+    const toggleBtn = document.querySelector('.menu-toggle');
 
+    nav.classList.toggle('open');
+    overlay.classList.toggle('show');
+    toggleBtn.classList.toggle('open'); // pour l'animation du hamburger
+}
+
+// Ferme le menu (appelé par l'overlay ou par un lien)
+function closeMenu() {
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('menu-overlay');
+    const toggleBtn = document.querySelector('.menu-toggle');
+
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    toggleBtn.classList.remove('open');
+}
+
+// Fermer le menu quand on clique sur un lien (optionnel)
+document.querySelectorAll('#main-nav a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+});
     
