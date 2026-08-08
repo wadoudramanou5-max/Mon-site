@@ -599,17 +599,62 @@ main {
 }
 /* ---- Bouton hamburger ---- */
 .menu-toggle {
-    display: none; /* caché par défaut sur grand écran */
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 110; /* au-dessus du sidebar */
-    position: relative;
+  display: none; /* caché sur desktop */
+  position: relative; /* on passe en relatif pour un meilleur contrôle */
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(59, 36, 25, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(59, 36, 25, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 110;
+  margin-right: 12px;
+}
+
+.menu-toggle:hover {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(59, 36, 25, 0.15);
+  transform: scale(1.02);
+}
+
+.menu-toggle:active {
+  transform: scale(0.92);
+}
+
+/* Les trois lignes */
+.hamburger-line {
+  display: block;
+  height: 2.5px;
+  width: 22px;
+  background: var(--clay, #3b2419);
+  border-radius: 4px;
+  transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform-origin: center;
+}
+
+/* Animation en "X" quand le menu est ouvert */
+.menu-toggle.open .hamburger-line:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+  background: var(--amber-deep, #9c6620);
+}
+
+.menu-toggle.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-toggle.open .hamburger-line:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+  background: var(--amber-deep, #9c6620);
 }
 
 .hamburger-line {
