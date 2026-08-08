@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magasin en ligne - Cosmétiques</title>
-    <!-- Font Awesome 6 (gratuit) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* ============================================================
@@ -52,12 +52,9 @@
                    ============================================================ */
         :root {
             --primary: #8b5cf6;
-            /* violet doux */
             --primary-dark: #7c3aed;
             --secondary: #f472b6;
-            /* rose */
             --accent: #fbbf24;
-            /* or */
             --dark: #1e1b2e;
             --text: #2d2a2a;
             --text-light: #6b6a7a;
@@ -125,7 +122,6 @@
             border-bottom: 1px solid rgba(139, 92, 246, 0.10);
         }
 
-        /* logo texte (optionnel) */
         header::before {
             content: "✨ Beauté Shop";
             font-weight: 700;
@@ -134,11 +130,6 @@
             letter-spacing: -0.5px;
         }
 
-        header::before span {
-            color: var(--secondary);
-        }
-
-        /* menu-toggle (hamburger) */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -169,7 +160,6 @@
             transform: rotate(-45deg) translate(5px, -6px);
         }
 
-        /* navigation */
         nav {
             display: flex;
             align-items: center;
@@ -202,7 +192,6 @@
             background: var(--primary);
         }
 
-        /* overlay pour mobile */
         .menu-overlay {
             display: none;
             position: fixed;
@@ -291,7 +280,6 @@
             color: var(--primary-dark);
         }
 
-        /* boutons */
         .btn,
         .WhatsApp-btn,
         .whatsapp-submit,
@@ -590,10 +578,8 @@
         }
 
         /* ============================================================
-                   RESPONSIVE — MOBILE FIRST
+                   RESPONSIVE
                    ============================================================ */
-
-        /* Tablettes & petits écrans */
         @media (max-width: 992px) {
             .product-grid {
                 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -647,10 +633,6 @@
                 padding: 0.8rem 1rem;
                 border-radius: var(--radius-sm);
                 font-size: 1.05rem;
-            }
-
-            nav ul li a:hover {
-                background: rgba(139, 92, 246, 0.06);
             }
 
             .menu-overlay.open {
@@ -740,7 +722,6 @@
             }
         }
 
-        /* très petits écrans */
         @media (max-width: 380px) {
             .product-grid {
                 grid-template-columns: 1fr;
@@ -767,7 +748,6 @@
             margin-bottom: 2rem;
         }
 
-        /* petit badge "nouveau" ou "promo" (optionnel) */
         .badge {
             background: var(--accent);
             color: var(--dark);
@@ -780,7 +760,6 @@
             display: inline-block;
         }
 
-        /* transition fade pour l'affichage des catégories */
         .produitpeaunoir,
         .produitpeaublanche {
             animation: fadeUp 0.4s ease;
@@ -797,9 +776,6 @@
             }
         }
 
-        /* ============================================================
-                   SCROLLBAR (personnalisée)
-                   ============================================================ */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -844,7 +820,7 @@
     ============================================================ -->
     <main>
 
-        <!-- ========== PAGE D'ACCUEIL ========== -->
+        <!-- ========== ACCUEIL ========== -->
         <section id="home">
             <h1>Bienvenue dans mon magasin en ligne</h1>
             <p>Découvrez nos produits de qualité et profitez de nos offres spéciales !</p>
@@ -871,7 +847,7 @@
             </button>
         </section>
 
-        <!-- ========== PAGE À PROPOS ========== -->
+        <!-- ========== À PROPOS ========== -->
         <section id="about">
             <h1>À propos de nous</h1>
             <p>Bienvenue sur la page à propos de notre magasin en ligne ! Nous sommes passionnés par la fourniture de produits de qualité à nos clients. Notre mission est de rendre votre expérience d'achat en ligne agréable et satisfaisante.</p>
@@ -879,15 +855,13 @@
             <p>Merci de faire partie de notre communauté et de nous permettre de vous servir. Nous sommes impatients de vous offrir une expérience d'achat exceptionnelle !</p>
         </section>
 
-       
-
-        <!-- ========== PAGE CONTACT ========== -->
+        <!-- ========== CONTACT ========== -->
         <section id="contact">
             <h1>Contactez-nous</h1>
             <p>Nous sommes là pour vous aider ! N'hésitez pas à nous contacter pour toute question, suggestion ou demande d'assistance. Votre satisfaction est notre priorité.</p>
             <p>Vous pouvez nous joindre par les moyens suivants :</p>
             <ul>
-                <li>Email :...</li>
+                <li>Email : wadoudramanou5@gmail.com</li>
                 <li>
                     Téléphone : +229 0197417444
                     <a href="https://wa.me/2290197417444" class="whatsapp" target="_blank">
@@ -961,37 +935,37 @@ SCRIPTS
         toggle.classList.remove('active');
     }
 
-    // Fermer le menu au clic sur un lien (mobile)
+    // Fermeture du menu au clic sur un lien
     document.querySelectorAll('#main-nav a').forEach(link => {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', function(e) {
+            // Si le lien est une ancre interne, fermer le menu
+            if (this.getAttribute('href').startsWith('#')) {
+                closeMenu();
+                // Défilement fluide géré par CSS scroll-behavior, mais on peut ajouter un léger délai
+                // pour que le menu se ferme avant le défilement
+            }
+        });
     });
 
-    // ========== CATÉGORIES PRODUITS ==========
-    const pdnLink = document.getElementById('pdn');
-    const pdpLink = document.getElementById('pdp');
-    const sectionPeauNoire = document.getElementById('produitpeaunoir');
-    const sectionPeauBlanche = document.getElementById('produitpeaublanche');
-
-    function showPeauNoire(e) {
-        e.preventDefault();
-        sectionPeauNoire.style.display = 'block';
-        sectionPeauBlanche.style.display = 'none';
-        pdnLink.classList.add('active-cat');
-        pdpLink.classList.remove('active-cat');
-    }
-
-    function showPeauBlanche(e) {
-        e.preventDefault();
-        sectionPeauNoire.style.display = 'none';
-        sectionPeauBlanche.style.display = 'block';
-        pdpLink.classList.add('active-cat');
-        pdnLink.classList.remove('active-cat');
-    }
-
-    if (pdnLink && pdpLink) {
-        pdnLink.addEventListener('click', showPeauNoire);
-        pdpLink.addEventListener('click', showPeauBlanche);
-    }
+    // ========== DÉFILEMENT FLUIDE POUR LES ANCRES (optionnel) ==========
+    // Le CSS html { scroll-behavior: smooth; } gère déjà le défilement fluide.
+    // On peut néanmoins ajouter un petit ajustement pour compenser la hauteur du header fixe.
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     // ========== FORMULAIRES → WHATSAPP ==========
     document.querySelectorAll('.contact-form').forEach(form => {
