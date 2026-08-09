@@ -190,6 +190,7 @@
         nav ul li a.active {
             color: var(--white);
             background: var(--primary);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
         }
 
         .menu-overlay {
@@ -206,7 +207,7 @@
         }
 
         /* ============================================================
-                   MAIN
+                   MAIN & SECTIONS (animations fade-in)
                    ============================================================ */
         main {
             flex: 1;
@@ -214,6 +215,76 @@
             margin: 0 auto;
             padding: 2rem 1.5rem 3rem;
             width: 100%;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            margin-bottom: 4rem;
+            scroll-margin-top: 80px; /* compensation pour header sticky */
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* délais progressifs pour les éléments internes */
+        section h1,
+        section h2,
+        section p,
+        section .product-grid,
+        section .liensproduits,
+        section .contact-form,
+        section .map-container,
+        section ul,
+        section .more {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition-delay: 0.1s;
+        }
+
+        section.visible h1,
+        section.visible h2,
+        section.visible p,
+        section.visible .product-grid,
+        section.visible .liensproduits,
+        section.visible .contact-form,
+        section.visible .map-container,
+        section.visible ul,
+        section.visible .more {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-grid .product {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+            transition-delay: 0.15s;
+        }
+
+        section.visible .product-grid .product {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-grid .product:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+        .product-grid .product:nth-child(3) {
+            transition-delay: 0.35s;
+        }
+        .product-grid .product:nth-child(4) {
+            transition-delay: 0.45s;
+        }
+        .product-grid .product:nth-child(5) {
+            transition-delay: 0.55s;
+        }
+        .product-grid .product:nth-child(6) {
+            transition-delay: 0.65s;
         }
 
         /* ============================================================
@@ -669,6 +740,10 @@
                 padding: 0.4rem 1rem;
                 font-size: 0.8rem;
             }
+
+            section {
+                scroll-margin-top: 70px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -935,21 +1010,7 @@ SCRIPTS
         toggle.classList.remove('active');
     }
 
-    // Fermeture du menu au clic sur un lien
-    document.querySelectorAll('#main-nav a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Si le lien est une ancre interne, fermer le menu
-            if (this.getAttribute('href').startsWith('#')) {
-                closeMenu();
-                // Défilement fluide géré par CSS scroll-behavior, mais on peut ajouter un léger délai
-                // pour que le menu se ferme avant le défilement
-            }
-        });
-    });
-
-    // ========== DÉFILEMENT FLUIDE POUR LES ANCRES (optionnel) ==========
-    // Le CSS html { scroll-behavior: smooth; } gère déjà le défilement fluide.
-    // On peut néanmoins ajouter un petit ajustement pour compenser la hauteur du header fixe.
+    // ========== DÉFILEMENT FLUIDE AVEC COMPENSATION ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -957,15 +1018,63 @@ SCRIPTS
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
+                // Fermer le menu mobile si ouvert
+                closeMenu();
+                // Calculer la position avec compensation du header
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+                // Mettre à jour le lien actif après le défilement
+                setTimeout(() => updateActiveLink(), 100);
             }
         });
     });
+
+    // ========== OBSERVER POUR ANIMATIONS FADE-IN ==========
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    sections.forEach(section => observer.observe(section));
+
+    // ========== SURVILLANCE DU SCROLL POUR LIEN ACTIF ==========
+    const navLinks = document.querySelectorAll('#main-nav a[href^="#"]');
+
+    function updateActiveLink() {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        let currentSectionId = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 50;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const scrollY = window.scrollY;
+
+            if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + currentSectionId) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Initialiser et écouter le scroll
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
 
     // ========== FORMULAIRES → WHATSAPP ==========
     document.querySelectorAll('.contact-form').forEach(form => {
@@ -974,7 +1083,8 @@ SCRIPTS
             const nom = this.querySelector('input[name="nom"]')?.value || '';
             const tel = this.querySelector('input[name="telephone"]')?.value || '';
             const msg = this.querySelector('textarea[name="message"]')?.value || '';
-            const texte = `Bonjour%20je%20suis%20${encodeURIComponent(nom)}%0ATéléphone%20:%20${encodeURIComponent(tel)}%0A%0A${encodeURIComponent(msg)}`;
+            const texte =
+                `Bonjour%20je%20suis%20${encodeURIComponent(nom)}%0ATéléphone%20:%20${encodeURIComponent(tel)}%0A%0A${encodeURIComponent(msg)}`;
             const url = `https://wa.me/2290197417444?text=${texte}`;
             window.open(url, '_blank');
         });
@@ -986,7 +1096,8 @@ SCRIPTS
             const product = this.closest('.product');
             const nom = product?.querySelector('h2')?.textContent || 'Produit';
             const prix = product?.querySelector('.price')?.textContent || '';
-            const texte = `Bonjour%20je%20souhaite%20commander%20:%20${encodeURIComponent(nom)}%20(${encodeURIComponent(prix)})`;
+            const texte =
+                `Bonjour%20je%20souhaite%20commander%20:%20${encodeURIComponent(nom)}%20(${encodeURIComponent(prix)})`;
             const url = `https://wa.me/2290197417444?text=${texte}`;
             window.open(url, '_blank');
         });
