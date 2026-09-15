@@ -171,6 +171,203 @@
         }
 
         /* ============================================================
+                   HERO (section d'accueil e-commerce)
+                   ============================================================ */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 2rem 0 3rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #ede9fe;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 40px;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .hero-btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat strong {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .hero-stat span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+        }
+
+        .hero-blob {
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 62% 38% 55% 45% / 45% 55% 45% 55%;
+            opacity: 0.18;
+            filter: blur(2px);
+            animation: blobMove 8s ease-in-out infinite;
+        }
+
+        @keyframes blobMove {
+            0%, 100% { border-radius: 62% 38% 55% 45% / 45% 55% 45% 55%; transform: rotate(0deg); }
+            50% { border-radius: 45% 55% 42% 58% / 55% 45% 58% 42%; transform: rotate(8deg); }
+        }
+
+        .hero-image {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            border: 6px solid var(--white);
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-card {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--white);
+            padding: 0.7rem 1.1rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+            z-index: 3;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        .hero-card i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .hero-card-1 {
+            top: 10%;
+            left: -4%;
+            animation-delay: 0s;
+        }
+
+        .hero-card-2 {
+            bottom: 8%;
+            right: -6%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 1rem;
+            }
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions,
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-visual {
+                min-height: 320px;
+                margin-top: 1rem;
+            }
+            .hero-image {
+                width: 220px;
+                height: 220px;
+            }
+            .hero-card {
+                font-size: 0.78rem;
+                padding: 0.55rem 0.9rem;
+            }
+            .hero-card-1 { left: 2%; }
+            .hero-card-2 { right: 2%; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats {
+                gap: 1.2rem;
+            }
+            .hero-image {
+                width: 180px;
+                height: 180px;
+            }
+            .hero-card {
+                display: none;
+            }
+        }
+
+        /* ============================================================
                    HEADER / NAVIGATION
                    ============================================================ */
         header {
@@ -971,31 +1168,43 @@
     ============================================================ -->
     <main>
 
-        <!-- ========== ACCUEIL ========== -->
-        <section id="home">
-            <h1>Bienvenue dans mon magasin en ligne</h1>
-            <p>Découvrez nos produits de qualité et profitez de nos offres spéciales !</p>
-
-            <div class="product-grid">
-                <div class="product">
-                    <img src="images/102844120.avif" alt="Vaseline cocoa Lotion" />
-                    <h2>Vaseline cocoa radiant</h2>
-                    <p>Hydrate et illumine la peau grâce au beurre de cacao.</p>
-                    <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+        <!-- ========== ACCUEIL / HERO ========== -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fa-solid fa-sparkles"></i> Cosmétiques naturels & unifiants</span>
+                <h1>Révélez l'éclat naturel de votre peau</h1>
+                <p class="hero-subtitle">Des soins soigneusement sélectionnés pour peau noire et peau blanche — crèmes, lotions et sérums qui hydratent, unifient et subliment votre teint au quotidien.</p>
+                <div class="hero-actions">
+                    <button class="btn" onclick="window.location.href='produit.html'">
+                        <i class="fa-solid fa-bag-shopping"></i> Découvrir nos produits
+                    </button>
+                    <a href="https://wa.me/2290197417444" target="_blank" class="btn hero-btn-secondary">
+                        <i class="fa-brands fa-whatsapp"></i> Nous écrire
+                    </a>
                 </div>
-                <div class="product">
-                    <img src="images/download.jpg" alt="Vaseline cocoa radiant Lotion" />
-                    <h2>Vaseline cocoa radiant</h2>
-                    <p>Lotion enrichie au beurre de cacao pour une peau douce.</p>
-                    <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <strong>100%</strong>
+                        <span>Produits sélectionnés</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>24h</strong>
+                        <span>Réponse rapide</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>Porto-Novo</strong>
+                        <span>Retrait & livraison</span>
+                    </div>
                 </div>
             </div>
-
-            <button class="more" onclick="window.location.href='produit.html'">
-                Voir plus de produits
-            </button>
+            <div class="hero-visual">
+                <div class="hero-blob"></div>
+                <div class="hero-card hero-card-1"><i class="fa-solid fa-spa"></i> Soin naturel</div>
+                <div class="hero-card hero-card-2"><i class="fa-solid fa-droplet"></i> Hydratation intense</div>
+                <div class="hero-image">
+                    <img src="images/Creme-eclat-Ametis-2-600x600.png" alt="Produit vedette Beauté Shop" />
+                </div>
+            </div>
         </section>
 
         <!-- ========== À PROPOS ========== -->
