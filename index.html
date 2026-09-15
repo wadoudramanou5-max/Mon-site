@@ -106,6 +106,71 @@
         }
 
         /* ============================================================
+                   PRÉCHARGEMENT (écran de chargement)
+                   ============================================================ */
+        body.loading {
+            overflow: hidden;
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2140 100%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-logo {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: preloaderPulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(0.97); }
+        }
+
+        .preloader-bar-track {
+            width: 220px;
+            max-width: 60vw;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preloader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        .preloader-percent {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================================
                    HEADER / NAVIGATION
                    ============================================================ */
         header {
@@ -866,7 +931,18 @@
         }
     </style>
 </head>
-<body>
+<body class="loading">
+
+    <!-- ============================================================
+    ÉCRAN DE CHARGEMENT
+    ============================================================ -->
+    <div id="preloader">
+        <div class="preloader-logo">✨ Beauté Shop</div>
+        <div class="preloader-bar-track">
+            <div class="preloader-bar-fill" id="preloader-bar"></div>
+        </div>
+        <div class="preloader-percent" id="preloader-percent">0%</div>
+    </div>
 
     <!-- ============================================================
     HEADER
@@ -991,6 +1067,29 @@ FOOTER
 SCRIPTS
 ============================================================ -->
 <script>
+    // ========== ÉCRAN DE CHARGEMENT ==========
+    (function() {
+        const bar = document.getElementById('preloader-bar');
+        const percentEl = document.getElementById('preloader-percent');
+        const preloader = document.getElementById('preloader');
+        let progress = 0;
+
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) progress = 100;
+            bar.style.width = progress + '%';
+            percentEl.textContent = Math.floor(progress) + '%';
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.classList.remove('loading');
+                }, 350);
+            }
+        }, 150);
+    })();
+
     // ========== MENU MOBILE ==========
     function toggleMenu() {
         const nav = document.getElementById('main-nav');

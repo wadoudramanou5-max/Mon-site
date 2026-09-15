@@ -130,6 +130,53 @@
             letter-spacing: -0.5px;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ---------- Bouton panier (header) ---------- */
+        .cart-toggle {
+            position: relative;
+            background: rgba(139, 92, 246, 0.08);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1.15rem;
+            transition: var(--transition);
+        }
+
+        .cart-toggle:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--secondary);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -285,7 +332,8 @@
         .btn,
         .WhatsApp-btn,
         .whatsapp-submit,
-        .more {
+        .more,
+        .add-cart-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -305,7 +353,8 @@
         .btn:hover,
         .WhatsApp-btn:hover,
         .whatsapp-submit:hover,
-        .more:hover {
+        .more:hover,
+        .add-cart-btn:hover {
             background: var(--primary-dark);
             transform: scale(1.02);
             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
@@ -314,8 +363,18 @@
         .btn:active,
         .WhatsApp-btn:active,
         .whatsapp-submit:active,
-        .more:active {
+        .more:active,
+        .add-cart-btn:active {
             transform: scale(0.96);
+        }
+
+        .add-cart-btn {
+            width: 100%;
+        }
+
+        .add-cart-btn.added {
+            background: #22c55e;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
         }
 
         .WhatsApp-btn {
@@ -463,6 +522,217 @@
         .contact-form textarea {
             resize: vertical;
             min-height: 120px;
+        }
+
+        /* ============================================================
+                   PANIER (drawer latéral)
+                   ============================================================ */
+        .cart-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(3px);
+            z-index: 1100;
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 420px;
+            max-width: 92vw;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+            z-index: 1101;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee6f5;
+        }
+
+        .cart-header h3 {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cart-close {
+            background: rgba(139, 92, 246, 0.08);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--dark);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .cart-close:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #f1edf5;
+        }
+
+        .cart-item img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            background: #f3f0f5;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            color: var(--dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cart-item-price {
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cart-item-qty button {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid #e0dae8;
+            background: var(--white);
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary);
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .cart-item-qty button:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .cart-item-qty span {
+            min-width: 18px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-remove {
+            background: transparent;
+            border: none;
+            color: #c9c4d6;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.4rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .cart-item-remove:hover {
+            color: #ef4444;
+        }
+
+        .cart-footer {
+            padding: 1.25rem 1.5rem 1.5rem;
+            border-top: 1px solid #eee6f5;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .cart-total-row span:last-child {
+            color: var(--primary-dark);
+        }
+
+        .cart-checkout {
+            width: 100%;
+        }
+
+        .cart-checkout:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .cart-clear {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .cart-clear:hover {
+            color: #ef4444;
         }
 
         /* ============================================================
@@ -614,6 +884,11 @@
                 padding: 0.4rem 1rem;
                 font-size: 0.8rem;
             }
+
+            .cart-panel {
+                width: 100%;
+                max-width: 100vw;
+            }
         }
 
         @media (max-width: 480px) {
@@ -632,7 +907,8 @@
                 font-size: 0.95rem;
                 padding: 0.1rem 0.8rem;
             }
-            .WhatsApp-btn {
+            .WhatsApp-btn,
+            .add-cart-btn {
                 font-size: 0.8rem;
                 padding: 0.5rem 1rem;
             }
@@ -692,6 +968,71 @@
         }
 
         /* ============================================================
+                   PRÉCHARGEMENT (écran de chargement)
+                   ============================================================ */
+        body.loading {
+            overflow: hidden;
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2140 100%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-logo {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: preloaderPulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(0.97); }
+        }
+
+        .preloader-bar-track {
+            width: 220px;
+            max-width: 60vw;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preloader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        .preloader-percent {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================================
                    SCROLLBAR
                    ============================================================ */
         ::-webkit-scrollbar {
@@ -709,18 +1050,23 @@
         }
     </style>
 </head>
-<body>
+<body class="loading">
+
+    <!-- ============================================================
+    ÉCRAN DE CHARGEMENT
+    ============================================================ -->
+    <div id="preloader">
+        <div class="preloader-logo">✨ Beauté Shop</div>
+        <div class="preloader-bar-track">
+            <div class="preloader-bar-fill" id="preloader-bar"></div>
+        </div>
+        <div class="preloader-percent" id="preloader-percent">0%</div>
+    </div>
 
     <!-- ============================================================
     HEADER
     ============================================================ -->
     <header>
-        <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="toggleMenu()">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-
         <nav id="main-nav" role="navigation">
             <ul>
                 <li><a href="index.html#hero">Accueil</a></li>
@@ -730,8 +1076,47 @@
             </ul>
         </nav>
 
+        <div class="header-actions">
+            <button class="cart-toggle" id="cart-toggle" onclick="openCart()" aria-label="Voir le panier">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+            <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="toggleMenu()">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
         <div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
     </header>
+
+    <!-- ============================================================
+    PANIER (drawer)
+    ============================================================ -->
+    <div id="cart-overlay" class="cart-overlay" onclick="closeCart()"></div>
+    <aside class="cart-panel" id="cart-panel" aria-label="Panier">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping"></i> Mon panier</h3>
+            <button class="cart-close" onclick="closeCart()" aria-label="Fermer le panier">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="cart-body">
+            <p class="cart-empty" id="cart-empty">Votre panier est vide.</p>
+            <div id="cart-items"></div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <span id="cart-total">0 FCFA</span>
+            </div>
+            <button class="whatsapp-submit cart-checkout" id="cart-checkout" onclick="checkoutWhatsApp()" disabled>
+                <i class="fa-brands fa-whatsapp"></i> Valider sur WhatsApp
+            </button>
+            <button class="cart-clear" onclick="clearCart()">Vider le panier</button>
+        </div>
+    </aside>
 
     <!-- ============================================================
     MAIN — PAGE PRODUITS
@@ -760,7 +1145,7 @@
                     <h2>AMETIS</h2>
                     <p>Crème unifiante et hydratante à la Niacinamide et vitamine B3.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 2 -->
                 <div class="product">
@@ -768,7 +1153,7 @@
                     <h2>SVR</h2>
                     <p>Traite l'acné, les taches et les rides. Tolérance maximale.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 3 -->
                 <div class="product">
@@ -776,7 +1161,7 @@
                     <h2>Produit 3</h2>
                     <p>Description du produit 3.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 4 -->
                 <div class="product">
@@ -784,7 +1169,7 @@
                     <h2>Nuhanciam</h2>
                     <p>Unifie le teint et élimine les taches brunes.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 5 -->
                 <div class="product">
@@ -792,7 +1177,7 @@
                     <h2>Clarince</h2>
                     <p>Description du produit.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 6 -->
                 <div class="product">
@@ -800,7 +1185,7 @@
                     <h2>Produit 6</h2>
                     <p>Description du produit 6.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 7 -->
                 <div class="product">
@@ -808,15 +1193,15 @@
                     <h2>Produit 7</h2>
                     <p>Description du produit 7.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 8 -->
                 <div class="product">
                     <img src="images/product2.webp" alt="Produit" />
                     <h2>Produit 8</h2>
-                    <p>Description du produit</p>
+                    <p>Description du produit 8.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
             </div>
         </div>
@@ -833,7 +1218,7 @@
                     <h2>Produit 1</h2>
                     <p>Description du produit 1.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 2 -->
                 <div class="product">
@@ -841,7 +1226,7 @@
                     <h2>Produit 2</h2>
                     <p>Description du produit 2.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 3 -->
                 <div class="product">
@@ -849,7 +1234,7 @@
                     <h2>Produit 3</h2>
                     <p>Description du produit 3.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
                 <!-- Produit 4 -->
                 <div class="product">
@@ -857,7 +1242,7 @@
                     <h2>Produit 4</h2>
                     <p>Description du produit 4.</p>
                     <span class="price">4 500 FCFA</span>
-                    <button class="WhatsApp-btn">Commander</button>
+                    <button class="add-cart-btn" onclick="addToCart(this)"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier</button>
                 </div>
             </div>
         </div>
@@ -901,6 +1286,31 @@
     JAVASCRIPT (spécifique à la page produit)
     ============================================================ -->
     <script>
+        const WHATSAPP_NUMBER = "2290197417444";
+
+        // ========== ÉCRAN DE CHARGEMENT ==========
+        (function() {
+            const bar = document.getElementById('preloader-bar');
+            const percentEl = document.getElementById('preloader-percent');
+            const preloader = document.getElementById('preloader');
+            let progress = 0;
+
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) progress = 100;
+                bar.style.width = progress + '%';
+                percentEl.textContent = Math.floor(progress) + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                        document.body.classList.remove('loading');
+                    }, 350);
+                }
+            }, 150);
+        })();
+
         // ========== MENU MOBILE ==========
         function toggleMenu() {
             const nav = document.getElementById('main-nav');
@@ -952,32 +1362,146 @@
             pdpLink.addEventListener('click', showPeauBlanche);
         }
 
-        // ========== FORMULAIRE → WHATSAPP ==========
+        // ========== FORMULAIRE → WHATSAPP (commande libre) ==========
         document.querySelectorAll('.contact-form').forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const nom = this.querySelector('input[name="nom"]')?.value || '';
                 const tel = this.querySelector('input[name="telephone"]')?.value || '';
                 const msg = this.querySelector('textarea[name="message"]')?.value || '';
-                const texte =
-                    `Bonjour%20je%20suis%20${encodeURIComponent(nom)}%0ATéléphone%20:%20${encodeURIComponent(tel)}%0A%0A${encodeURIComponent(msg)}`;
-                const url = `https://wa.me/2290197417444?text=${texte}`;
+                const texte = `Bonjour, je suis ${nom}\nTéléphone : ${tel}\n\n${msg}`;
+                const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texte)}`;
                 window.open(url, '_blank');
             });
         });
 
-        // ========== BOUTONS "COMMANDER" → WHATSAPP ==========
-        document.querySelectorAll('.WhatsApp-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const product = this.closest('.product');
-                const nom = product?.querySelector('h2')?.textContent || 'Produit';
-                const prix = product?.querySelector('.price')?.textContent || '';
-                const texte =
-                    `Bonjour%20je%20souhaite%20commander%20:%20${encodeURIComponent(nom)}%20(${encodeURIComponent(prix)})`;
-                const url = `https://wa.me/2290197417444?text=${texte}`;
-                window.open(url, '_blank');
-            });
+        // ============================================================
+        // PANIER
+        // ============================================================
+        let cart = [];
+
+        function formatFCFA(n) {
+            return n.toLocaleString('fr-FR') + ' FCFA';
+        }
+
+        function openCart() {
+            document.getElementById('cart-panel').classList.add('open');
+            document.getElementById('cart-overlay').classList.add('open');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-panel').classList.remove('open');
+            document.getElementById('cart-overlay').classList.remove('open');
+        }
+
+        function addToCart(btn) {
+            const product = btn.closest('.product');
+            const name = product.querySelector('h2').textContent.trim();
+            const priceText = product.querySelector('.price').textContent;
+            const price = parseInt(priceText.replace(/\D/g, ''), 10) || 0;
+            const img = product.querySelector('img').src;
+
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, img, qty: 1 });
+            }
+
+            updateCartUI();
+
+            // Petit retour visuel sur le bouton
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Ajouté';
+            btn.classList.add('added');
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.remove('added');
+            }, 900);
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            countEl.textContent = totalItems;
+            countEl.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            const listEl = document.getElementById('cart-items');
+            const emptyEl = document.getElementById('cart-empty');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('cart-checkout');
+
+            if (cart.length === 0) {
+                listEl.innerHTML = '';
+                emptyEl.style.display = 'block';
+                totalEl.textContent = formatFCFA(0);
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+            checkoutBtn.disabled = false;
+
+            listEl.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <span class="cart-item-price">${formatFCFA(item.price)}</span>
+                        <div class="cart-item-qty">
+                            <button onclick="changeQty(${index}, -1)" aria-label="Diminuer">−</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" aria-label="Augmenter">+</button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Retirer">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            totalEl.textContent = formatFCFA(total);
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+
+            const lignes = cart
+                .map(item => `• ${item.name} x${item.qty} — ${formatFCFA(item.price * item.qty)}`)
+                .join('\n');
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            const message = `Bonjour, je souhaite commander :\n\n${lignes}\n\nTotal : ${formatFCFA(total)}`;
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Fermer le panier avec la touche Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCart();
         });
+
+        // Initialisation de l'affichage du panier
+        updateCartUI();
     </script>
 
 </body>
