@@ -911,6 +911,136 @@
         }
 
         /* ============================================================
+                   BADGES & SOUS-TITRES DE SECTION (réutilisables)
+                   ============================================================ */
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #ede9fe;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 40px;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            max-width: 640px;
+        }
+
+        /* ============================================================
+                   À PROPOS – GRILLE DE VALEURS
+                   ============================================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.75rem 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .about-feature:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .about-feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-feature h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .about-feature p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* ============================================================
+                   CONTACT – CARTES D'INFOS
+                   ============================================================ */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.75rem 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            display: block;
+        }
+
+        a.contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #ede9fe;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-light);
+            word-break: break-word;
+        }
+
+        /* ============================================================
+                   FOOTER – marque
+                   ============================================================ */
+        .footer-brand {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============================================================
                    RESPONSIVE
                    ============================================================ */
         @media (max-width: 992px) {
@@ -1005,6 +1135,11 @@
 
             section {
                 scroll-margin-top: 70px;
+            }
+
+            .about-grid,
+            .contact-info-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1209,27 +1344,52 @@
 
         <!-- ========== À PROPOS ========== -->
         <section id="about">
-            <h1>À propos de nous</h1>
-            <p>Bienvenue sur la page à propos de notre magasin en ligne ! Nous sommes passionnés par la fourniture de produits de qualité à nos clients. Notre mission est de rendre votre expérience d'achat en ligne agréable et satisfaisante.</p>
-            <p>Nous sélectionnons soigneusement nos produits pour garantir leur qualité et leur durabilité. Notre équipe travaille dur pour vous offrir un service client exceptionnel, répondant à toutes vos questions et préoccupations.</p>
-            <p>Merci de faire partie de notre communauté et de nous permettre de vous servir. Nous sommes impatients de vous offrir une expérience d'achat exceptionnelle !</p>
+            <span class="section-badge"><i class="fa-solid fa-heart"></i> À propos</span>
+            <h1>Une passion pour votre beauté naturelle</h1>
+            <p class="section-subtitle">Nous sélectionnons avec soin des cosmétiques efficaces et adaptés à chaque type de peau, pour que prendre soin de vous reste simple, agréable et accessible. Notre mission : rendre votre expérience d'achat en ligne aussi agréable que satisfaisante, avec un service client à l'écoute à chaque étape.</p>
+
+            <div class="about-grid">
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Produits sélectionnés</h3>
+                    <p>Chaque produit est choisi pour sa qualité et son efficacité, pour peau noire comme peau blanche.</p>
+                </div>
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <h3>Commande simplifiée</h3>
+                    <p>Ajoutez vos produits au panier et validez votre commande en un message sur WhatsApp.</p>
+                </div>
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                    <h3>Satisfaction garantie</h3>
+                    <p>Conseils personnalisés et suivi de commande : votre satisfaction reste notre priorité.</p>
+                </div>
+            </div>
         </section>
 
         <!-- ========== CONTACT ========== -->
         <section id="contact">
-            <h1>Contactez-nous</h1>
-            <p>Nous sommes là pour vous aider ! N'hésitez pas à nous contacter pour toute question, suggestion ou demande d'assistance. Votre satisfaction est notre priorité.</p>
-            <p>Vous pouvez nous joindre par les moyens suivants :</p>
-            <ul>
-                <li>Email : ... pas encore disponible</li>
-                <li>
-                    Téléphone : +229 0197417444
-                    <a href="https://wa.me/2290197417444" class="whatsapp" target="_blank">
-                        <button class="whatsapp-button">Appeler</button>
-                    </a>
-                </li>
-                <li>Adresse : Notre magasin est situé au marché Ouando à Porto-Novo</li>
-            </ul>
+            <span class="section-badge"><i class="fa-solid fa-comments"></i> Contact</span>
+            <h1>Parlons de vos besoins</h1>
+            <p class="section-subtitle">Une question, une envie de conseil personnalisé ou une commande à passer ? Nous sommes disponibles et répondons rapidement.</p>
+
+            <div class="contact-info-grid">
+                <a href="https://wa.me/2290197417444" target="_blank" class="contact-card">
+                    <div class="contact-card-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <h3>WhatsApp</h3>
+                    <p>+229 01 97 41 74 44</p>
+                </a>
+                <div class="contact-card">
+                    <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>Email</h3>
+                    <p>Bientôt disponible</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=March%C3%A9%20Ouando%20Porto-Novo" target="_blank" class="contact-card">
+                    <div class="contact-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <h3>Adresse</h3>
+                    <p>Marché Ouando, Porto-Novo</p>
+                </a>
+            </div>
 
             <div class="map-container">
                 <iframe
@@ -1263,13 +1423,14 @@
 FOOTER
 ============================================================ -->
 <footer class="footer">
-    <p>Suivez-nous sur les réseaux sociaux</p>
+    <div class="footer-brand">✨ Beauté Shop</div>
+    <p>Des cosmétiques qui subliment votre peau, à commander en toute simplicité sur WhatsApp.</p>
     <div class="social-media">
         <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
         <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
         <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
     </div>
-    <p class="copyright">&copy; 2025 Mon Magasin en Ligne. Tous droits réservés.</p>
+    <p class="copyright">&copy; 2025 Beauté Shop. Tous droits réservés.</p>
 </footer>
 
 <!-- ============================================================
